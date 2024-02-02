@@ -22,7 +22,7 @@ public class PCHaendler {
 
 		// Ausgeben
 
-		rechungausgeben(artikel, anzahl, nettogesamtpreis, bruttogesamtpreis, mwst);
+		rechnungausgeben(artikel, anzahl, nettogesamtpreis, bruttogesamtpreis, mwst);
 	}
 	public static String liesString(String text, Scanner myScanner){
 		System.out.println(text);
@@ -47,7 +47,7 @@ public class PCHaendler {
 		double bruttogesamtpreis = nettogesamtpreis * (1 + mwst / 100);
 		return bruttogesamtpreis;
 	}
-	public static void rechungausgeben(String artikel, int anzahl, double nettogesamtpreis, double bruttogesamtpreis, double mwst){
+	public static void rechnungausgeben(String artikel, int anzahl, double nettogesamtpreis, double bruttogesamtpreis, double mwst){
 		System.out.println("\tRechnung");
 		System.out.printf("\t\t Netto:  %-20s %6d %10.2f %n", artikel, anzahl, nettogesamtpreis);
 		System.out.printf("\t\t Brutto: %-20s %6d %10.2f (%.1f%s)%n", artikel, anzahl, bruttogesamtpreis, mwst, "%");
