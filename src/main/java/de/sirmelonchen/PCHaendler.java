@@ -8,28 +8,49 @@ public class PCHaendler {
 		Scanner myScanner = new Scanner(System.in);
 
 		// Benutzereingaben lesen
-		System.out.println("was möchten Sie bestellen?");
-		String artikel = myScanner.next();
+		String artikel = liesString("was möchten Sie bestellen?", myScanner);
 
-		System.out.println("Geben Sie die Anzahl ein:");
-		int anzahl = myScanner.nextInt();
+		int anzahl = liesint("Geben Sie die Anzahl ein:", myScanner);
 
-		System.out.println("Geben Sie den Nettopreis ein:");
-		double preis = myScanner.nextDouble();
+		double preis = liesdouble("Geben Sie den Nettopreis ein:", myScanner);
 
-		System.out.println("Geben Sie den Mehrwertsteuersatz in Prozent ein:");
-		double mwst = myScanner.nextDouble();
+		double mwst = liesdouble("Geben Sie den Mehrwertsteuersatz in Prozent ein:", myScanner);
 
 		// Verarbeiten
-		double nettogesamtpreis = anzahl * preis;
-		double bruttogesamtpreis = nettogesamtpreis * (1 + mwst / 100);
+		double nettogesamtpreis = berechneGesamtnettopreis(anzahl, preis);
+		double bruttogesamtpreis = berechneGesamtbruttopreis(nettogesamtpreis, mwst);
 
 		// Ausgeben
 
+		rechungausgeben(artikel, anzahl, nettogesamtpreis, bruttogesamtpreis, mwst);
+	}
+	public static String liesString(String text, Scanner myScanner){
+		System.out.println(text);
+		String artikel = myScanner.next();
+		return artikel;
+	}
+	public static int liesint(String text, Scanner myScanner){
+		System.out.println(text);
+		int anzahl = myScanner.nextInt();
+		return anzahl;
+	}
+	public static double liesdouble(String text, Scanner myScanner){
+		System.out.println(text);
+		double preis = myScanner.nextDouble();
+		return preis;
+	}
+	public static double berechneGesamtnettopreis(int anzahl, double nettopreis){
+		double nettogesamtpreis = anzahl * nettopreis;
+		return nettogesamtpreis;
+	}
+	public static double berechneGesamtbruttopreis(double nettogesamtpreis, double mwst){
+		double bruttogesamtpreis = nettogesamtpreis * (1 + mwst / 100);
+		return bruttogesamtpreis;
+	}
+	public static void rechungausgeben(String artikel, int anzahl, double nettogesamtpreis, double bruttogesamtpreis, double mwst){
 		System.out.println("\tRechnung");
 		System.out.printf("\t\t Netto:  %-20s %6d %10.2f %n", artikel, anzahl, nettogesamtpreis);
 		System.out.printf("\t\t Brutto: %-20s %6d %10.2f (%.1f%s)%n", artikel, anzahl, bruttogesamtpreis, mwst, "%");
-
 	}
 
 }
